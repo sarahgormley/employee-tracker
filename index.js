@@ -31,31 +31,50 @@ connection.connect(function(err) {
 // Prompts
 function intro() {
     inquirer
-        .prompt([{
+        .prompt({
 
-                type: 'checkbox',
-                message: 'What would you like to do?',
-                name: 'intro',
-                choices: [
-                    'View All Employees',
-                    'View Employee by Manager',
-                    'View Employees by Department',
-                    'Add Employee',
-                    'Update Employee Role',
-                    'Update Employee Managers',
-                    'Delete Employee',
-                    'View All Roles',
-                    'Add Role',
-                    'Delete Role',
-                    'View All Departments',
-                    'Add Department',
-                    'Delete Department',
-                    'Quit',
+            type: 'checkbox',
+            message: 'What would you like to do?',
+            name: 'intro',
+            choices: [
+                'View All Employees',
+                'View All Departments',
+                'View All Roles',
+                'Add an Employee',
+                'Add a Department',
+                'Add a Role',
+                'Quit',
 
-                ],
-            },
+            ],
 
-        ]).then
+        }).then(function(ans) {
+            switch (ans.choices) {
+                case 'View All Employees':
+                    viewAllEmployees();
+                    break;
+                case 'View All Departments':
+                    viewAllDepts();
+                    break;
+                case 'View All Roles':
+                    viewAllRoles();
+                    break;
+                case 'Add an Employee':
+                    addEmployee();
+                    break;
+                case 'Add a Department':
+                    addDept();
+                    break;
+                case 'Add a Role':
+                    addRole();
+                    break;
+                case 'Quit':
+                    quitApp();
+                    break;
+                default:
+                    break;
+
+            }
+        })
 };
 
 app.use((req, res) => {
