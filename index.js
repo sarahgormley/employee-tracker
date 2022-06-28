@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt');
 const express = require('express');
 const mysql = require('mysql2');
 const inquirer = require('inquirer');
+const { urlToHttpOptions } = require('url');
 
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -14,11 +15,20 @@ const db = mysql.createConnection({
         user: 'root',
         // MySQL password
         password: process.env.DB_PASSWORD,
-        database: 'employee_db'
+        database: 'employee_db',
+        port: 3001
     },
     console.log(`Connected to the employee_db database.`)
 );
+
+
 //Connects server to database
+connection.connect(function(err) {
+    if (err) throw err;
+    intro();
+});
+
+// Prompts
 function intro() {
     inquirer
         .prompt([{
