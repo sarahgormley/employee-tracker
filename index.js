@@ -77,6 +77,17 @@ function intro() {
         })
 };
 
+function viewAllEmployees() {
+    let sqlquery = 'SELECT * FROM employee';
+    connection.query(query, function(err, res) {
+        if (err) throw err;
+        console.log(res.length + 'employees listed');
+        console.table('All employees', res);
+        intro();
+    })
+
+}
+
 app.use((req, res) => {
     res.status(404).end();
 });
