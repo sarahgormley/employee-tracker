@@ -1,28 +1,20 @@
-const cTable = require('console.table');
-const bcrypt = require('bcrypt');
-const express = require('express');
 const mysql = require('mysql2');
 const inquirer = require('inquirer');
-const { urlToHttpOptions } = require('url');
+const consoleTable = require('console.table');
+require("dotenv").config();
 
-const PORT = process.env.PORT || 3001;
-const app = express();
 
-// Connect to database
-const db = mysql.createConnection({
+//creating connection to SQL Database
+const connection = mysql.createConnection({
         host: 'localhost',
-        // MySQL username,
+        port: 3306,
         user: 'root',
-        // MySQL password
         password: process.env.DB_PASSWORD,
-        database: 'employee_db',
-        port: 3001
+        database: 'employee_db'
     },
-    console.log(`Connected to the employee_db database.`)
+    console.log(`Connected to the employee_db database`)
 );
-
-
-//Connects server to database
+//connects server and database
 connection.connect(function(err) {
     if (err) throw err;
     intro();
@@ -87,11 +79,3 @@ function viewAllEmployees() {
     })
 
 }
-
-app.use((req, res) => {
-    res.status(404).end();
-});
-
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-});
