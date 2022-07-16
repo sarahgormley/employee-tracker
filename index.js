@@ -4,7 +4,7 @@ const consoleTable = require('console.table');
 require("dotenv").config();
 
 
-//creating connection to SQL Database
+
 const connection = mysql.createConnection({
         host: 'localhost',
         port: 3306,
@@ -14,7 +14,7 @@ const connection = mysql.createConnection({
     },
     console.log(`Connected to the employee_db database`)
 );
-//connects server and database
+
 connection.connect(function(err) {
     if (err) throw err;
     intro();
@@ -25,9 +25,9 @@ function intro() {
     inquirer
         .prompt({
 
-            type: 'checkbox',
+            type: 'list',
             message: 'What would you like to do?',
-            name: 'intro',
+            name: 'choices',
             choices: [
                 'View All Employees',
                 'View All Departments',
@@ -37,7 +37,7 @@ function intro() {
                 'Add a Role',
                 'Quit',
 
-            ],
+            ]
 
         }).then(function(ans) {
             switch (ans.choices) {
@@ -70,12 +70,12 @@ function intro() {
 };
 
 function viewAllEmployees() {
-    let sqlquery = 'SELECT * FROM employee';
+    var query = 'SELECT * FROM employee';
     connection.query(query, function(err, res) {
         if (err) throw err;
         console.log(res.length + 'employees listed');
-        console.table('All employees', res);
+        console.table('All employees:', res);
         intro();
     })
 
-}
+};
