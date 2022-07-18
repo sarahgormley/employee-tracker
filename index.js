@@ -99,4 +99,10 @@ function viewAllRoles() {
         console.table('All roles:', res);
         intro();
     })
+};
+
+
+function quitApp() {
+    connection.end();
+    console.log('Thanks for using the employee tracker, see you next time!')
 }
