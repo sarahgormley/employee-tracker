@@ -159,13 +159,13 @@ function addEmployee() {
 function addDept() {
     inquirer
         .prompt([{
-            name: 'newDept',
+            name: 'dept_name',
             type: 'input',
             message: 'Which department would you like to add?'
         }]).then(function(ans) {
             connection.query(
                 'INSERT INTO department SET ?', {
-                    name: ans.newDepartment
+                    dept_name: ans.dept_name
                 });
             let query = 'SELECT * FROM department';
             connection.query(query, function(err, res) {
