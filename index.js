@@ -101,6 +101,63 @@ function viewAllRoles() {
     })
 };
 
+function addEmployee() {
+    connection.query('SELECT * FROM roles', function(err, res) {
+        if (err) throw err;
+        inquirer
+            .prompt([{
+                    name: 'first_name',
+                    type: 'input',
+                    message: "What is the employees first name? ",
+                },
+                {
+                    name: 'last_name',
+                    type: 'input',
+                    message: "What is the employees last name? "
+                },
+                {
+                    name: 'manager_id',
+                    type: 'input',
+                    message: "What is the employees manager ID? "
+                },
+                {
+                    name: 'roles',
+                    type: 'list',
+                    choices: function() {
+                        var roleArr = [];
+                        for (let i = 0; i < res.length; i++) {
+                            roleArr.push(res[i].title);
+                        }
+                        return roleArr;
+                    },
+                    message: "What is this employees role? "
+                }
+            ]).then(function(ans) {
+                let role_id;
+                for (let i = 0; i < res.length; i++) {
+                    if (res[i].title == ans.role) {
+                        role_id = res[i].id;
+                        console.log(role_id)
+                    }
+                }
+                connection.query(
+                    'INSERT INTO employee SET ?', {
+                        first_name: ans.first_name,
+                        last_name: ans.last_name,
+                        manager_id: ans.manager_id,
+                        role_id: role_id,
+                    },
+                    function(err) {
+                        if (err) throw err;
+                        console.log('Your employee has been added!');
+                        intro();
+                    })
+            })
+    })
+};
+
+
+
 
 function quitApp() {
     connection.end();
