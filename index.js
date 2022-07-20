@@ -177,6 +177,58 @@ function addDept() {
         })
 };
 
+function addRole() {
+    connection.query('SELECT * FROM department', function(err, res) {
+        if (err) throw err;
+
+        inquirer
+            .prompt([{
+                    name: 'new_role',
+                    type: 'input',
+                    message: "What new role would you like to add?"
+                },
+                {
+                    name: 'salary',
+                    type: 'input',
+                    message: 'What is the salary of this role? (number)'
+                },
+                {
+                    name: 'Department',
+                    type: 'list',
+                    message: 'What department does the role work in?',
+                    choices: function() {
+                        var deptArr = [];
+                        for (let i = 0; i < res.length; i++) {
+                            deptArr.push(res[i].dept_name);
+                        }
+                        return deptArr;
+                    },
+                }
+            ]).then(function(ans) {
+                let department_id;
+                for (let i = 0; i < res.length; i++) {
+                    if (res[i].dept_name == ans.Department) {
+                        department_id = res[i].id;
+                    }
+                }
+
+                connection.query(
+                    'INSERT INTO roles SET ?', {
+                        title: ans.new_role,
+                        salary: ans.salary,
+                        department_id: department_id
+                    },
+                    function(err, res) {
+                        if (err) throw err;
+                        console.log('Your new role has been added!');
+                        console.table('All Roles:', res);
+                        intro();
+                    })
+            })
+    });
+};
+
+
 function quitApp() {
     connection.end();
     console.log('Thanks for using the employee tracker, see you next time!')
