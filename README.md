@@ -2,7 +2,6 @@
 
 ![GitHub](https://img.shields.io/badge/license-Apache-yellow.svg)
 
-[Website Live URL](https://sarahgormley.github.io/weather-dashboard/)
 
 ## Table Of Contents
 * [Description](#description)
@@ -16,7 +15,7 @@
 
 
 ## Description
-This employee tracker was created as a way for managers to keep track of their employees using Console Table. 
+This Employee Tracker was created as a way for managers to keep track of their employees using Console Table. 
 
 This employee tracker allows managers to easily view their employee's name, role, department, salary, and manager by simply following a few prompts. 
 
@@ -55,3 +54,5 @@ To contribute to this project, please Email me :) See below.
 For questions and comments related to this repository, please email me at: sarah.gormley39@gmail.com. Alternatively, view my other projects at [sarahgormley](https://github.com/sarahgormley).
 
 ## Walkthrough
+
+[Watch the Employee Tracker walkthrough here](./Assets/Untitled_%20Jul%2020%2C%202022%206_18%20PM.mp4) or [here if that link doesn't work!](https://drive.google.com/file/d/1tH9MZnzo5MNEIJPCsvQ8Kxh0GhVKbIuZ/view?usp=sharing)
