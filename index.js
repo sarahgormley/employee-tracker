@@ -59,6 +59,9 @@ function intro() {
                 case 'Add a Role':
                     addRole();
                     break;
+                case 'Update a Role':
+                    updateRole();
+                    break;
                 case 'Quit':
                     quitApp();
                     break;
@@ -118,7 +121,7 @@ function addEmployee() {
                 {
                     name: 'manager_id',
                     type: 'input',
-                    message: "What is the employees manager ID? "
+                    message: "What is the employees manager's ID? "
                 },
                 {
                     name: 'roles',
@@ -227,6 +230,10 @@ function addRole() {
             })
     });
 };
+
+function updateRole() {
+
+}
 
 
 function quitApp() {
